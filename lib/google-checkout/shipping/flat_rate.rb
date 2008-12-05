@@ -24,7 +24,7 @@ module GoogleCheckout
       end
 
       def to_xml
-        validate_areas
+        validate_shipping_restrictions
         xml = Builder::XmlMarkup.new
         xml.tag!('flat-rate-shipping', :name => name) do
           xml.tag!('price', price, :currency => currency)
@@ -48,11 +48,15 @@ module GoogleCheckout
 
       private
 
-      def validate_areas
+      def validate_shipping_restrictions
         if (@allowed_areas.detect {|s| !s.kind_of?(GoogleCheckout::Geography::Area)} ||
             @excluded_areas.detect {|s| !s.kind_of?(GoogleCheckout::Geography::Area)})
           raise ArgumentError,
             "Shipping restrictions must be a subclass of GoogleCheckout::Geography::Area"
+        end
+        if !@excluded_areas.empty? && @allowed_areas.empty?
+          raise ArgumentError,
+            "You must have allowed areas if you have excluded areas."
         end
       end
 

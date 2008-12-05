@@ -24,6 +24,13 @@ describe GoogleCheckout::Shipping::FlatRate do
     @shipping.to_xml.should match(%r{<shipping-restrictions>.*</shipping-restrictions>})
   end
 
+  it 'should not allow excluded areas without any allowed areas' do
+    lambda do
+      @shipping.excluded_areas << GoogleCheckout::Geography::UsState.new('WI')
+      @shipping.to_xml
+    end.should raise_error(ArgumentError)
+  end
+
   it 'should not generate the shipping-restrictions tag if they are not set' do
     @shipping.to_xml.should_not match(%r{<shipping-restrictions>.*</shipping-restrictions>})
   end
@@ -34,6 +41,7 @@ describe GoogleCheckout::Shipping::FlatRate do
   end
 
   it 'should include the excluded areas in the generated xml' do
+    @shipping.allowed_areas << GoogleCheckout::Geography::UsState.new('TX')
     @shipping.excluded_areas << GoogleCheckout::Geography::UsState.new('WI')
     @shipping.to_xml.should match(%r{<excluded-areas>.*</excluded-areas>})
   end
@@ -52,6 +60,7 @@ describe GoogleCheckout::Shipping::FlatRate do
 
   it 'should not allow invalid excluded areas' do
     lambda do
+      @shipping.allowed_areas << GoogleCheckout::Geography::UsState.new('WI')
       @shipping.excluded_areas << 'Do not allow this'
       @shipping.to_xml
     end.should raise_error(ArgumentError)
