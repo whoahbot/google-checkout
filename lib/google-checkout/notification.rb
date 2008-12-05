@@ -34,7 +34,7 @@ module GoogleCheckout
       # Convert +request-received+ to +request_received+,
       # then to a +RequestReceived+ object of the proper class 
       # which will be created and returned.
-      const_name = Inflector.camelize(doc.root.name.gsub('-', '_'))
+      const_name = ActiveSupport::Inflector.camelize(doc.root.name.gsub('-', '_'))
       if GoogleCheckout.const_get(const_name)
         return GoogleCheckout.const_get(const_name).new(doc)
       end
