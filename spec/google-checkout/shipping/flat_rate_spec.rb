@@ -19,4 +19,42 @@ describe GoogleCheckout::Shipping::FlatRate do
     @shipping.to_xml.should match(%r{<price currency="CAD">})
   end
 
+  it 'should generate the shipping-restrictions tag if they are set' do
+    @shipping.allowed_areas << GoogleCheckout::Geography::UsState.new('WI')
+    @shipping.to_xml.should match(%r{<shipping-restrictions>.*</shipping-restrictions>})
+  end
+
+  it 'should not generate the shipping-restrictions tag if they are not set' do
+    @shipping.to_xml.should_not match(%r{<shipping-restrictions>.*</shipping-restrictions>})
+  end
+
+  it 'should include the allowed areas in the generated xml' do
+    @shipping.allowed_areas << GoogleCheckout::Geography::UsState.new('WI')
+    @shipping.to_xml.should match(%r{<allowed-areas>.*</allowed-areas>})
+  end
+
+  it 'should include the excluded areas in the generated xml' do
+    @shipping.excluded_areas << GoogleCheckout::Geography::UsState.new('WI')
+    @shipping.to_xml.should match(%r{<excluded-areas>.*</excluded-areas>})
+  end
+
+  it 'should include the all us po box in the generated xml' do
+    @shipping.allow_us_po_box = false
+    @shipping.to_xml.should match(%r{<allow-us-po-box>false</allow-us-po-box>})
+  end
+
+  it 'should not allow invalid allowed areas' do
+    lambda do
+      @shipping.allowed_areas << 'Do not allow this'
+      @shipping.to_xml
+    end.should raise_error(ArgumentError)
+  end
+
+  it 'should not allow invalid excluded areas' do
+    lambda do
+      @shipping.excluded_areas << 'Do not allow this'
+      @shipping.to_xml
+    end.should raise_error(ArgumentError)
+  end
+
 end

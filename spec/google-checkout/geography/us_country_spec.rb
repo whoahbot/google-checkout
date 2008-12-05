@@ -19,11 +19,8 @@ describe GoogleCheckout::Geography::UsCountry do
     @area.to_xml.should match(%r{<us-country-area country-area="FULL_50_STATES"/>})
   end
 
-  it 'should not allow invalid regions on initalization' do
-    lambda {GoogleCheckout::Geography::UsCountry.new(:my_house)}.should raise_error(ArgumentError)
+  it 'should not allow invalid regions' do
+    lambda {GoogleCheckout::Geography::UsCountry.new(:my_house).to_xml}.should raise_error(ArgumentError)
   end
-
-  it 'should not allow region to be set to an invalid region' do
-    lambda {@area.region = :my_house}.should raise_error(ArgumentError)
-  end
+  
 end
