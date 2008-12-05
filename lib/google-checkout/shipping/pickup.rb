@@ -12,9 +12,9 @@ module GoogleCheckout
 
       def to_xml
         xml = Builder::XmlMarkup.new
-        xml.tag!('pickup', :name => name) {
+        xml.tag!('pickup', :name => name) do
           xml.tag!('price', price, :currency => currency)
-        }
+        end
       end
 
     end
