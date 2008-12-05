@@ -1,6 +1,6 @@
 module GoogleCheckout
   module Geography
-    class World
+    class World < GeographicArea
 
       def to_xml
         xml = Builder::XmlMarkup.new
