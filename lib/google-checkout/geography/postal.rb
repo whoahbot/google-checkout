@@ -1,6 +1,6 @@
 module GoogleCheckout
   module Geography
-    class Postal < GeographicArea
+    class Postal < Area
 
       attr_accessor :country, :postal_pattern
 

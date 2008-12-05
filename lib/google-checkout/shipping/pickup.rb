@@ -1,6 +1,6 @@
 module GoogleCheckout
   module Shipping
-    class Pickup < ShippingMethod
+    class Pickup < Method
 
       attr_accessor :name, :price, :currency
 

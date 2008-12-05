@@ -1,6 +1,6 @@
 module GoogleCheckout
   module Geography
-    class UsCountry < GeographicArea
+    class UsCountry < Area
 
       VALID_REGIONS = [:continental_48, :full_50_states, :all]
 

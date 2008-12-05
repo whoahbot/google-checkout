@@ -1,6 +1,6 @@
 module GoogleCheckout
   module Shipping
-    class FlatRate < ShippingMethod
+    class FlatRate < Method
 
       attr_accessor :name, :price, :currency
 
