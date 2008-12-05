@@ -5,7 +5,7 @@ describe GoogleCheckout::Geography::World do
     @area = GoogleCheckout::Geography::World.new
   end
 
-  it 'should include the name in the generated xml' do
+  it 'should generate a self closing world tag' do
     @area.to_xml.should eql("<world-area/>")
   end
 
