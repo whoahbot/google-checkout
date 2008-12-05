@@ -1,0 +1,1 @@
+require 'google-checkout/geography/world'

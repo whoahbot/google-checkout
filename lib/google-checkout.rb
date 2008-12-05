@@ -23,6 +23,7 @@ require 'google-checkout/command'
 require 'google-checkout/cart'
 
 require 'google-checkout/shipping'
+require 'google-checkout/geography'
 
 ##
 # TODO
