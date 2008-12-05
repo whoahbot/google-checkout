@@ -67,6 +67,8 @@ module GoogleCheckout
     attr_accessor :edit_cart_url
     attr_accessor :continue_shopping_url
 
+    attr_accessor :shipping_methods
+
     # The default options for drawing in the button that are filled in when
     # checkout_button or button_url is called.
     DefaultButtonOpts = {
@@ -84,26 +86,8 @@ module GoogleCheckout
       super(merchant_id, merchant_key)
       @contents = []
       @merchant_private_data = {}
+      @shipping_methods = []
       items.each { |i| add_item i }
-    end
-
-
-    # This method sets the flat rate shipping for the entire cart.
-    # If set, it will over ride the per product flat rate shipping.
-    # +frs_options+ should be a hash containing the following options:
-    # * price
-    # You may fill an some optional values as well:
-    # * currency (defaults to 'USD')
-    def flat_rate_shipping(frs_options)
-      # We need to check that the necessary keys are in the hash,
-      # Otherwise the error will happen in the middle of to_xml,
-      # and the bug will be harder to track.
-      unless frs_options.include? :price
-        raise ArgumentError,
-        "Required keys missing: :price"
-      end
-
-      @flat_rate_shipping = {:currency => 'USD'}.merge(frs_options)
     end
 
     def empty?
@@ -220,55 +204,15 @@ module GoogleCheckout
               }
             }
 
-            # TODO Shipping calculations
-            #      These are currently hard-coded for PeepCode.
-            #      Does anyone care to send a patch to enhance
-            #      this for more flexibility?
             xml.tag!('shipping-methods') {
-              xml.tag!('pickup', :name =>'Digital Download') {
-                xml.tag!('price', "0.00", :currency => currency)
-              }
+              @shipping_methods.each do |shipping_method|
+                xml << shipping_method.to_xml
+              end
             }
           }
         }
       }
       @xml.dup
-    end
-
-    # Generates the XML for the shipping cost, conditional on
-    # @flat_rate_shipping being set.
-    def shipping_cost_xml
-      xml = Builder::XmlMarkup.new
-      if @flat_rate_shipping
-        xml.price(:currency => currency) {
-          xml.text! @flat_rate_shipping[:price].to_s
-        }
-      else
-        xml.price(:currency => @currency) {
-          xml.text! shipping_cost.to_s
-        }
-      end
-    end
-
-    # Returns the shipping cost for the contents of the cart.
-    def shipping_cost
-      currency = 'USD'
-      shipping = @contents.inject(0) { |total,item|
-        total + item[:regular_shipping].to_i
-      }.to_s
-    end
-
-    # Returns the currency for the cart.  Mixing currency not allowed; this
-    # library can't convert between currencies.
-    def currency
-      # Mixing currency not allowed; this
-      # library can't convert between
-      # currencies.
-      @currency ||=
-      (@contents.map { |item|
-        item.currency
-      }.uniq.first rescue nil) ||
-      'USD'
     end
 
     # Returns the signature for the cart XML.
