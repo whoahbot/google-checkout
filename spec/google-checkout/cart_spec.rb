@@ -94,6 +94,15 @@ describe GoogleCheckout, "Cart Post" do
     @cart.to_xml.should match(%r{<merchant-item-id>ITEM-007</merchant-item-id>})
   end
 
+  it "should include the merchant calculations url in the generated xml" do
+    @cart.merchant_calculations_url = 'http://my.calculations.com'
+    @cart.to_xml.should match(%r{<merchant-calculations-url>http://my.calculations.com</merchant-calculations-url>})
+  end
+
+  it "should not include the merchant calculations url if it's not set" do
+    @cart.to_xml.should_not match(%r{<merchant-calculations-url>})
+  end
+
   it "should generate XML"
 
   it "should receive error when placing false request"

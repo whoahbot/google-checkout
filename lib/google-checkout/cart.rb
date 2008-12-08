@@ -67,6 +67,8 @@ module GoogleCheckout
     attr_accessor :edit_cart_url
     attr_accessor :continue_shopping_url
 
+    attr_accessor :merchant_calculations_url
+
     attr_accessor :shipping_methods
 
     # The default options for drawing in the button that are filled in when
@@ -186,8 +188,12 @@ module GoogleCheckout
           xml.tag!('merchant-checkout-flow-support') {
             xml.tag!('edit-cart-url', @edit_cart_url) if @edit_cart_url
             xml.tag!('continue-shopping-url', @continue_shopping_url) if @continue_shopping_url
-
             xml.tag!("request-buyer-phone-number", false)
+            xml.tag!('merchant-calculations') {
+              xml.tag!('merchant-calculations-url') {
+                xml.text! @merchant_calculations_url
+              }
+            } if @merchant_calculations_url
 
             # TODO tax-tables
             xml.tag!("tax-tables") {
