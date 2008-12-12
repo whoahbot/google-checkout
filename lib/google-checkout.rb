@@ -19,6 +19,7 @@ require 'active_support'
 
 require 'duck_punches/hpricot'
 require 'google-checkout/notification'
+require 'google-checkout/merchant_calculation'
 require 'google-checkout/command'
 require 'google-checkout/cart'
 

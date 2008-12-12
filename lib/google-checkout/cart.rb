@@ -173,6 +173,9 @@ module GoogleCheckout
                 xml.quantity {
                   xml.text! item[:quantity].to_s
                 }
+                xml.tag!('merchant-private-item-data') {
+                  xml << item[:merchant_private_item_data]
+                } if item.key?(:merchant_private_item_data)
               }
             }
           }
