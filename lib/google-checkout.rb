@@ -34,7 +34,7 @@ require 'google-checkout/geography'
 
 module GoogleCheckout
 
-  VERSION = '0.2.0'
+  #VERSION = '0.2.0'
 
   @@live_system = true
   
