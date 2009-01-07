@@ -294,8 +294,10 @@ module GoogleCheckout
         subdir = "checkout/"
       end
 
+      protocol = opts[:https] ? 'https' : 'http'
+
       # TODO Use /checkout/buttons/checkout.gif if in sandbox.
-      "http://#{submit_domain}/#{ subdir }buttons/#{bname}?#{path}"
+      "#{protocol}://#{submit_domain}/#{ subdir }buttons/#{bname}?#{path}"
     end
   end
 
