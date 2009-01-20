@@ -153,6 +153,31 @@ module GoogleCheckout
   end
 
   ##
+  # Tells Google to refund the order.
+
+  class RefundOrder < OrderCommand
+
+    attr_accessor :reason, :comment
+
+    def to_xml
+      raise "Refund amount must be greater than 0!" unless @amount.to_f > 0.0
+
+      xml = Builder::XmlMarkup.new
+      xml.instruct!
+      @xml = xml.tag!('refund-order', {
+        :xmlns => "http://checkout.google.com/schema/2",
+        "google-order-number" => @google_order_number
+      }) do
+        xml.tag!("amount", @amount, {:currency => @currency})
+        xml.tag!("reason", @reason)
+        xml.tag!("comment", @comment)
+      end
+      @xml
+    end
+
+  end
+
+  ##
   # Send a message to the buyer associated with an order.
   #
   # Google will actually send the message to their email address.
