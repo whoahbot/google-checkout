@@ -153,6 +153,36 @@ module GoogleCheckout
   end
 
   ##
+  # Tells Google tracking data for the order.
+
+  class AddTrackingData < OrderCommand
+
+    def initialize(merchant_id, merchant_key, google_order_number, carrier, tracking_number)
+      raise "Unknown carrier. Valid values are DHL, FedEx, UPS, USPS, and Other." unless ["DHL","FedEx","UPS","USPS","Other"].include? carrier
+
+      @carrier = carrier
+      @tracking_number = tracking_number
+      super(merchant_id, merchant_key, google_order_number)
+    end
+
+    def to_xml
+      xml = Builder::XmlMarkup.new
+      xml.instruct!
+      @xml = xml.tag!('add-tracking-data', {
+        :xmlns => "http://checkout.google.com/schema/2",
+        "google-order-number" => @google_order_number
+      }) do
+        xml.tag!('tracking-data') do
+          xml.tag!('carrier', @carrier)
+          xml.tag!('tracking-number', @tracking_number)
+        end
+      end
+      @xml
+    end
+
+  end
+
+  ##
   # Tells Google to refund the order.
 
   class RefundOrder < OrderCommand
