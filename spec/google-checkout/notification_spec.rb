@@ -111,6 +111,10 @@ describe GoogleCheckout, "New Order Notification" do
     @notification.shipping_email.should == 'johnsmith@example.com'
   end
 
+  it "should get buyer-shipping-address/address1" do
+    @notification.shipping_address1.should == '10 Example Road'
+  end
+
 end
 
 

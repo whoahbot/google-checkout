@@ -261,6 +261,13 @@ module GoogleCheckout
       (@doc/"buyer-shipping-address"/"email").inner_html
     end
 
+    ##
+    # Returns shipping address1
+
+    def shipping_address1
+      (@doc/"buyer-shipping-address"/"address1").inner_html
+    end
+
   end
 
   class OrderStateChangeNotification < Notification; end
