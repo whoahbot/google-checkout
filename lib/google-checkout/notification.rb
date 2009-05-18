@@ -178,9 +178,9 @@ module GoogleCheckout
     end
 
     ##
-    # Returns billing contact name.
+    # Returns billing name.
 
-    def billing_contact_name
+    def billing_name
       (@doc/"buyer-billing-address"/"contact-name").inner_html
     end
 
@@ -233,12 +233,14 @@ module GoogleCheckout
       (@doc/"buyer-billing-address"/"phone").inner_html
     end
 
+    ##
     # Returns billing first name
 
     def billing_first_name
       (@doc/"buyer-billing-address"/"structured-name"/"first-name").inner_html
     end
 
+    ##
     # Returns billing last name
 
     def billing_last_name

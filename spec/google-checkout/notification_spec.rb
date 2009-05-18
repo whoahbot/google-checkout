@@ -64,7 +64,7 @@ describe GoogleCheckout, "New Order Notification" do
   end
 
   it "should get buyer-billing-address/contact-name" do
-    @notification.billing_contact_name.should == 'Bill Hu'
+    @notification.billing_name.should == 'Bill Hu'
   end
 
   it "should get buyer-billing-address/email" do
