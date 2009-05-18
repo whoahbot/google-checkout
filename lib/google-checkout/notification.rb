@@ -177,25 +177,43 @@ module GoogleCheckout
       (@doc/"buyer-marketing-preferences"/"email-allowed").to_boolean
     end
 
+    ##
+    # Returns billing contact name.
+
     def billing_contact_name
       (@doc/"buyer-billing-address"/"contact-name").inner_html
     end
+
+    ##
+    # Returns billing email
 
     def billing_email
       (@doc/"buyer-billing-address"/"email").inner_html
     end
 
+    ##
+    # Returns billing address1
+
     def billing_address1
       (@doc/"buyer-billing-address"/"address1").inner_html
     end
+
+    ##
+    # Returns billing city
 
     def billing_city
       (@doc/"buyer-billing-address"/"city").inner_html
     end
 
+    ##
+    # Returns billing region
+
     def billing_region
       (@doc/"buyer-billing-address"/"region").inner_html
     end
+
+    ##
+    # Returns shipping email
 
     def shipping_email
       (@doc/"buyer-shipping-address"/"email").inner_html
