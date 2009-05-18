@@ -119,6 +119,10 @@ describe GoogleCheckout, "New Order Notification" do
     @notification.shipping_city.should == 'Sampleville'
   end
 
+  it "should get buyer-shipping-address/region" do
+    @notification.shipping_region.should == 'CA'
+  end
+
 end
 
 
