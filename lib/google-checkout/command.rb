@@ -191,6 +191,10 @@ module GoogleCheckout
 
     def to_xml
       raise "Refund amount must be greater than 0!" unless @amount.to_f > 0.0
+      raise "Must have a reason to refund an order!" if @reason.nil?
+      raise "Reason must be longer than 0 characters!" unless @reason.length > 0
+      raise "Reason cannot be greater than 140 characters!" if @reason.length > 140
+      raise "Comment cannot be greater than 140 characters!" if !@comment.nil? && @comment.length > 140
 
       xml = Builder::XmlMarkup.new
       xml.instruct!
@@ -200,7 +204,7 @@ module GoogleCheckout
       }) do
         xml.tag!("amount", @amount, {:currency => @currency})
         xml.tag!("reason", @reason)
-        xml.tag!("comment", @comment)
+        xml.tag!("comment", @comment) unless @comment.blank?
       end
       @xml
     end

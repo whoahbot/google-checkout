@@ -125,23 +125,58 @@ describe GoogleCheckout, "Refund Order" do
   before(:each) do
     @order = GoogleCheckout::RefundOrder.new("my_id", "my_key", "1234567890")
     GoogleCheckout.use_sandbox
-    @order.amount = 15.00
-    @order.currency = 'USD'
-    @order.comment = 'Discount for inconvenience; ship replacement item'
-    @order.reason = 'Damaged Merchandise'
   end
 
   it "should generate XML" do
+    @order.amount = '15.00'
+    @order.currency = 'USD'
+    @order.reason = 'Damaged Merchandise'
+    @order.comment = 'Discount for inconvenience; ship replacement item'
+
     xml = @order.to_xml
     xml.should match(%r{google-order-number="1234567890"})
-    xml.should match(%r{<amount currency="USD">15.0</amount>})
+    xml.should match(%r{<amount currency="USD">15.00</amount>})
+    xml.should match(%r{<reason>Damaged Merchandise</reason>})
     xml.should match(%r{<comment>Discount for inconvenience; ship replacement item</comment>})
+  end
+
+  it "should generate XML with no comment" do
+    @order.amount = '15.00'
+    @order.currency = 'USD'
+    @order.reason = 'Damaged Merchandise'
+
+    xml = @order.to_xml
+    xml.should match(%r{google-order-number="1234567890"})
+    xml.should match(%r{<amount currency="USD">15.00</amount>})
     xml.should match(%r{<reason>Damaged Merchandise</reason>})
   end
 
-  it "should return error when amount is 0" do
-    @order.amount = 0
-    lambda { @order.to_xml }.should raise_error("Refund amount must be greater than 0!")
+  it "should return an error when amount is 0" do
+    lambda { @order.post }.should raise_error("Refund amount must be greater than 0!")
+  end
+
+  it "should return an error when there is no reason" do
+    @order.amount = '15.00'
+    lambda { @order.post }.should raise_error("Must have a reason to refund an order!")
+  end
+
+  it "should return an error when reason is not longer than 0 characters" do
+    @order.amount = '15.00'
+    @order.reason = ''
+    lambda { @order.post }.should raise_error("Reason must be longer than 0 characters!")
+  end
+
+  it "should return an error when reason length is greater than 140 characters" do
+    @order.amount = '15.00'
+    @order.reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae est dui, at aliquam ligula. Ut imperdiet, justo eleifend ultricies nullam.'
+    lambda { @order.post }.should raise_error("Reason cannot be greater than 140 characters!")
+  end
+
+  it "should return an error when comment length is greater than 140 characters" do
+    @order.amount = '15.00'
+    @order.reason = 'Refund'
+    @order.comment = 'Sed tincidunt auctor feugiat. Nam ut enim ligula, vel scelerisque velit. Nulla eu eros nibh. Nullam sit amet sapien a leo sagittis cras amet.'
+    lambda { @order.post }.should raise_error("Comment cannot be greater than 140 characters!")
   end
 
 end
