@@ -155,11 +155,6 @@ describe GoogleCheckout, "Refund Order" do
     lambda { @order.post }.should raise_error("Refund amount must be greater than 0!")
   end
 
-  it "should return an error when there is no reason" do
-    @order.amount = '15.00'
-    lambda { @order.post }.should raise_error("Must have a reason to refund an order!")
-  end
-
   it "should return an error when reason is not longer than 0 characters" do
     @order.amount = '15.00'
     @order.reason = ''

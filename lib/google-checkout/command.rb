@@ -189,12 +189,17 @@ module GoogleCheckout
 
     attr_accessor :reason, :comment
 
+    def initialize(merchant_id, merchant_key, google_order_number)
+      super(merchant_id, merchant_key, google_order_number)
+      @reason = ''
+      @comment = ''
+    end
+
     def to_xml
       raise "Refund amount must be greater than 0!" unless @amount.to_f > 0.0
-      raise "Must have a reason to refund an order!" if @reason.nil?
       raise "Reason must be longer than 0 characters!" unless @reason.length > 0
       raise "Reason cannot be greater than 140 characters!" if @reason.length > 140
-      raise "Comment cannot be greater than 140 characters!" if !@comment.nil? && @comment.length > 140
+      raise "Comment cannot be greater than 140 characters!" if @comment.length > 140
 
       xml = Builder::XmlMarkup.new
       xml.instruct!
