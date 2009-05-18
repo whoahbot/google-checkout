@@ -89,6 +89,19 @@ describe GoogleCheckout, "Charge Order" do
     lambda { @order.post }.should raise_error(GoogleCheckout::APIError)
   end
 
+  it "should post request to Google and return error charged already" do
+    net_http = mock("net_http", { :null_object => true })
+    Net::HTTP.should_receive(:new).and_return(net_http)
+
+    # NOTE HTTP response code is irrelevant here.
+    error_response = Net::HTTPSuccess.new(Net::HTTP.version_1_2, 200, "OK")
+    error_response.should_receive(:body).and_return(read_xml_fixture('responses/error-charged'))
+    net_http.should_receive(:request).and_return(error_response)
+
+    response = @order.post
+    response.message.should == 'You cannot charge an order that is already completely charged'
+  end
+
 end
 
 describe GoogleCheckout, "Checkout API Request (with Cart)" do

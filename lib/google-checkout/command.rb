@@ -60,7 +60,7 @@ module GoogleCheckout
       case response
       when Net::HTTPSuccess, Net::HTTPClientError
         notification = Notification.parse(response.body)
-        if notification.error?
+        if notification.error? && !notification.message.eql?('You cannot charge an order that is already completely charged')
           raise APIError, "#{notification.message} [in #{GoogleCheckout.production? ? 'production' : 'sandbox' }]"
         end
         return notification
