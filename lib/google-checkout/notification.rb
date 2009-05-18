@@ -220,6 +220,13 @@ module GoogleCheckout
     end
 
     ##
+    # Returns billing country code
+
+    def billing_country_code
+      (@doc/"buyer-billing-address"/"country-code").inner_html
+    end
+
+    ##
     # Returns shipping email
 
     def shipping_email
