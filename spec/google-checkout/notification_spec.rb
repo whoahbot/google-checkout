@@ -63,7 +63,29 @@ describe GoogleCheckout, "New Order Notification" do
     @notification.email_allowed.should be_false
   end
 
-  it "should get email or buyer-shipping-address/email or buyer-billing-address/email"
+  it "should get buyer-billing-address/contact-name" do
+    @notification.billing_contact_name.should == 'Bill Hu'
+  end
+
+  it "should get buyer-billing-address/email" do
+    @notification.billing_email.should == 'billhu@example.com'
+  end
+
+  it "should get buyer-billing-address/address1" do
+    @notification.billing_address1.should == '99 Credit Lane'
+  end
+
+  it "should get buyer-billing-address/city" do
+    @notification.billing_city.should == 'Mountain View'
+  end
+
+  it "should get buyer-billing-address/region" do
+    @notification.billing_region.should == 'CA'
+  end
+
+  it "should get buyer-shipping-address/email" do
+    @notification.shipping_email.should == 'johnsmith@example.com'
+  end
 
 end
 

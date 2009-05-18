@@ -177,6 +177,30 @@ module GoogleCheckout
       (@doc/"buyer-marketing-preferences"/"email-allowed").to_boolean
     end
 
+    def billing_contact_name
+      (@doc/"buyer-billing-address"/"contact-name").inner_html
+    end
+
+    def billing_email
+      (@doc/"buyer-billing-address"/"email").inner_html
+    end
+
+    def billing_address1
+      (@doc/"buyer-billing-address"/"address1").inner_html
+    end
+
+    def billing_city
+      (@doc/"buyer-billing-address"/"city").inner_html
+    end
+
+    def billing_region
+      (@doc/"buyer-billing-address"/"region").inner_html
+    end
+
+    def shipping_email
+      (@doc/"buyer-shipping-address"/"email").inner_html
+    end
+
   end
 
   class OrderStateChangeNotification < Notification; end
