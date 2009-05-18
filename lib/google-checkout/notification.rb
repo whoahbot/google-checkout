@@ -310,6 +310,13 @@ module GoogleCheckout
       (@doc/"buyer-shipping-address"/"structured-name"/"first-name").inner_html
     end
 
+    ##
+    # Returns shipping last name
+
+    def shipping_last_name
+      (@doc/"buyer-shipping-address"/"structured-name"/"last-name").inner_html
+    end
+
   end
 
   class OrderStateChangeNotification < Notification; end
