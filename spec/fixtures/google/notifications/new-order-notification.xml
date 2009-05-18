@@ -3,7 +3,6 @@
     serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
     <google-order-number>841171949013218</google-order-number>
     <buyer-shipping-address>
-
         <contact-name>John Smith</contact-name>
         <email>johnsmith@example.com</email>
         <address1>10 Example Road</address1>
@@ -11,6 +10,11 @@
         <region>CA</region>
         <postal-code>94141</postal-code>
         <country-code>US</country-code>
+        <phone>5555551234</phone>
+        <structured-name>
+            <first-name>John</first-name>
+            <last-name>Smith</last-name>
+        </structured-name>
     </buyer-shipping-address>
     <buyer-billing-address>
         <contact-name>Bill Hu</contact-name>
@@ -20,6 +24,11 @@
         <region>CA</region>
         <postal-code>94043</postal-code>
         <country-code>US</country-code>
+        <phone>5555557890</phone>
+        <structured-name>
+            <first-name>Bill</first-name>
+            <last-name>Hu</last-name>
+        </structured-name>
     </buyer-billing-address>
     <buyer-id>294873009217523</buyer-id>
     <fulfillment-order-state>NEW</fulfillment-order-state>

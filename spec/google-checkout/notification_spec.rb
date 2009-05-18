@@ -92,15 +92,15 @@ describe GoogleCheckout, "New Order Notification" do
   end
 
   it "should get buyer-billing-address/phone" do
-    @notification.billing_phone.should == ''
+    @notification.billing_phone.should == '5555557890'
   end
 
   it "should get buyer-billing-address/structured-name/first-name" do
-    @notification.billing_first_name.should == ''
+    @notification.billing_first_name.should == 'Bill'
   end
 
   it "should get buyer-billing-address/structured-name/last-name" do
-    @notification.billing_last_name.should == ''
+    @notification.billing_last_name.should == 'Hu'
   end
 
   it "should get buyer-shipping-address/email" do
