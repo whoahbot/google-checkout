@@ -103,6 +103,10 @@ describe GoogleCheckout, "New Order Notification" do
     @notification.billing_last_name.should == 'Hu'
   end
 
+  it "should get buyer-shipping-address/contact-name" do
+    @notification.shipping_name.should == 'John Smith'
+  end
+
   it "should get buyer-shipping-address/email" do
     @notification.shipping_email.should == 'johnsmith@example.com'
   end

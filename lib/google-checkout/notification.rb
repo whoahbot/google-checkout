@@ -248,6 +248,13 @@ module GoogleCheckout
     end
 
     ##
+    # Returns shipping contact name
+
+    def shipping_name
+      (@doc/"buyer-shipping-address"/"contact-name").inner_html
+    end
+
+    ##
     # Returns shipping email
 
     def shipping_email
