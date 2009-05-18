@@ -120,6 +120,32 @@ describe GoogleCheckout, "Add Tracking Data" do
 
 end
 
+describe GoogleCheckout, "Refund Order" do
+
+  before(:each) do
+    @order = GoogleCheckout::RefundOrder.new("my_id", "my_key", "1234567890")
+    GoogleCheckout.use_sandbox
+    @order.amount = 15.00
+    @order.currency = 'USD'
+    @order.comment = 'Discount for inconvenience; ship replacement item'
+    @order.reason = 'Damaged Merchandise'
+  end
+
+  it "should generate XML" do
+    xml = @order.to_xml
+    xml.should match(%r{google-order-number="1234567890"})
+    xml.should match(%r{<amount currency="USD">15.0</amount>})
+    xml.should match(%r{<comment>Discount for inconvenience; ship replacement item</comment>})
+    xml.should match(%r{<reason>Damaged Merchandise</reason>})
+  end
+
+  it "should return error when amount is 0" do
+    @order.amount = 0
+    lambda { @order.to_xml }.should raise_error("Refund amount must be greater than 0!")
+  end
+
+end
+
 describe GoogleCheckout, "Checkout API Request (with Cart)" do
 
   it "should use HTTP Basic Auth"
