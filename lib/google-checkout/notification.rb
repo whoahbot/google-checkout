@@ -282,6 +282,13 @@ module GoogleCheckout
       (@doc/"buyer-shipping-address"/"region").inner_html
     end
 
+    ##
+    # Returns shipping postal code
+
+    def shipping_postal_code
+      (@doc/"buyer-shipping-address"/"postal-code").inner_html
+    end
+
   end
 
   class OrderStateChangeNotification < Notification; end
