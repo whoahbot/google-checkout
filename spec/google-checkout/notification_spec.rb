@@ -127,6 +127,10 @@ describe GoogleCheckout, "New Order Notification" do
     @notification.shipping_postal_code.should == '94141'
   end
 
+  it "should get buyer-shipping-address/country-code" do
+    @notification.shipping_country_code.should == 'US'
+  end
+
 end
 
 
