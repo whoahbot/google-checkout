@@ -227,6 +227,13 @@ module GoogleCheckout
     end
 
     ##
+    # Returns billing phone
+
+    def billing_phone
+      (@doc/"buyer-billing-address"/"phone").inner_html
+    end
+
+    ##
     # Returns shipping email
 
     def shipping_email
