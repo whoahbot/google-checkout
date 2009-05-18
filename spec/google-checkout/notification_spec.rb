@@ -83,6 +83,10 @@ describe GoogleCheckout, "New Order Notification" do
     @notification.billing_region.should == 'CA'
   end
 
+  it "should get buyer-billing-address/postal-code" do
+    @notification.billing_postal_code.should == '94043'
+  end
+
   it "should get buyer-shipping-address/email" do
     @notification.shipping_email.should == 'johnsmith@example.com'
   end

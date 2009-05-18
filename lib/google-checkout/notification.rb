@@ -213,6 +213,13 @@ module GoogleCheckout
     end
 
     ##
+    # Returns billing postal code
+
+    def billing_postal_code
+      (@doc/"buyer-billing-address"/"postal-code").inner_html
+    end
+
+    ##
     # Returns shipping email
 
     def shipping_email
