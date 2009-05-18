@@ -104,6 +104,22 @@ describe GoogleCheckout, "Charge Order" do
 
 end
 
+describe GoogleCheckout, "Add Tracking Data" do
+
+  before(:each) do
+    @order = GoogleCheckout::AddTrackingData.new("my_id", "my_key", "1234567890","UPS","Z5498W45987123684")
+    GoogleCheckout.use_sandbox
+  end
+
+  it "should generate XML" do
+    xml = @order.to_xml
+    xml.should match(%r{google-order-number="1234567890"})
+    xml.should match(%r{<carrier>UPS</carrier>})
+    xml.should match(%r{<tracking-number>Z5498W45987123684</tracking-number>})
+  end
+
+end
+
 describe GoogleCheckout, "Checkout API Request (with Cart)" do
 
   it "should use HTTP Basic Auth"
