@@ -233,6 +233,18 @@ module GoogleCheckout
       (@doc/"buyer-billing-address"/"phone").inner_html
     end
 
+    # Returns billing first name
+
+    def billing_first_name
+      (@doc/"buyer-billing-address"/"structured-name"/"first-name").inner_html
+    end
+
+    # Returns billing last name
+
+    def billing_last_name
+      (@doc/"buyer-billing-address"/"structured-name"/"last-name").inner_html
+    end
+
     ##
     # Returns shipping email
 
