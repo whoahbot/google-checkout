@@ -137,6 +137,15 @@ module GoogleCheckout
 
   class DeliverOrder < OrderCommand
 
+    def initialize(merchant_id, merchant_key, google_order_number, carrier, tracking_number, send_email = false)
+      raise "Unknown carrier. Valid values are DHL, FedEx, UPS, USPS, and Other." unless ["DHL","FedEx","UPS","USPS","Other"].include? carrier
+
+      @carrier = carrier
+      @tracking_number = tracking_number
+      @send_email = send_email
+      super(merchant_id, merchant_key, google_order_number)
+    end
+
     def to_xml
 
       xml = Builder::XmlMarkup.new
@@ -145,7 +154,11 @@ module GoogleCheckout
         :xmlns => "http://checkout.google.com/schema/2",
         "google-order-number" => @google_order_number
       }) do
-        xml.tag!("send-email", false)
+        xml.tag!('tracking-data') do
+          xml.tag!('carrier', @carrier)
+          xml.tag!('tracking-number', @tracking_number)
+        end
+        xml.tag!("send-email", @send_email)
       end
       @xml
     end
