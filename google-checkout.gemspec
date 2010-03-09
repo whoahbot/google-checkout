@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{google-checkout}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins"]
-  s.date = %q{2009-07-13}
+  s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu"]
+  s.date = %q{2010-03-09}
   s.description = %q{An experimental library for sending payment requests to Google Checkout.}
   s.email = %q{mattlins@gmail.com}
   s.extra_rdoc_files = [
@@ -59,6 +59,7 @@ Gem::Specification.new do |s|
      "spec/fixtures/google/notifications/order-state-change-notification.xml",
      "spec/fixtures/google/notifications/refund-amount-notification.xml",
      "spec/fixtures/google/notifications/risk-information-notification.xml",
+     "spec/fixtures/google/notification/cancelled-subscription-notification.xml",
      "spec/fixtures/google/responses/checkout-redirect.xml",
      "spec/fixtures/google/responses/error-charged.xml",
      "spec/fixtures/google/responses/error.xml",
