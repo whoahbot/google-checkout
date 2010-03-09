@@ -251,3 +251,16 @@ describe GoogleCheckout, "Refund Amount Notification" do
 
 end
 
+describe GoogleCheckout, "Cancelled Order Notification" do
+  
+  before(:each) do
+    @notification = GoogleCheckout::Notification.parse(read_xml_fixture('notifications/cancelled-subscription-notification'))
+  end
+
+  it_should_behave_like "basic notification"
+
+  it "should identify type of notification" do
+    @notification.should be_kind_of(GoogleCheckout::CancelledSubscriptionNotification)
+  end  
+    
+end

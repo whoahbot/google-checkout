@@ -121,6 +121,16 @@ module GoogleCheckout
     # You may fill in some optional values as well:
     # * quantity (defaults to 1)
     # * currency (defaults to 'USD')
+    # * subscription
+    # ** type (defaults to 'google')
+    # ** period (defaults to 'MONTHLY')
+    # ** start_date
+    # ** no_charge_after
+    # ** payment_times
+    # ** name
+    # ** description
+    # ** price
+    # ** quantity
     def add_item(item)
       @xml = nil
       if item.respond_to? :to_google_product
@@ -173,6 +183,45 @@ module GoogleCheckout
                 xml.quantity {
                   xml.text! item[:quantity].to_s
                 }
+                
+                # subscription item
+                if item.key?(:subscription)
+                  sub = item[:subscription]
+                  
+                  xm.subscription(:type => sub[:type].to_s, :period => sub[:period].to_s, :"start-date" => sub[:start_date].to_s, :"no-charge-after" => sub[:no_charge_after].to_s) {
+                    xml.payments {
+                      if sub.key?(:payment_times)
+                        xml.tag!('subscription-payment', :times => sub[:payment_times].to_s) {
+                          xml.tag!('maximum-charge', :currency => (item[:currency] || 'USD')) {
+                            xml.text! item[:price].to_s
+                          }
+                        }
+                      else
+                        xml.tag!('subscription-payment') {
+                          xml.tag!('maximum-charge', :currency => (item[:currency] || 'USD')) {
+                            xml.text! item[:price].to_s
+                          }
+                        }
+                      end
+                    }
+                    
+                    xml.tag!('recurrent-item') {
+                      xml.tag!('item-name') {
+                        xml.text! sub[:name].to_s
+                      }
+                      xml.tag!('item-description') {
+                        xml.text! sub[:description].to_s
+                      }
+                      xml.tag!('unit-price', :currency => (item[:currency] || 'USD')) {
+                        xml.text! sub[:price].to_s
+                      }
+                      xml.quantity {
+                        xml.text! sub[:quantity].to_s
+                      }
+                    }
+                  }
+                end
+                
                 xml.tag!('merchant-private-item-data') {
                   xml << item[:merchant_private_item_data]
                 } if item.key?(:merchant_private_item_data)

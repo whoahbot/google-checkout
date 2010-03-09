@@ -325,6 +325,8 @@ module GoogleCheckout
 
   class RiskInformationNotification < Notification; end
 
+  class CancelledSubscriptionNotification < Notification; end
+
   class CheckoutRedirect < Notification
 
     ##
@@ -334,7 +336,7 @@ module GoogleCheckout
       (@doc/"redirect-url").inner_html.gsub(/&amp;/, '&')
     end
 
-  end
+  end    
 
   class Error < Notification
 

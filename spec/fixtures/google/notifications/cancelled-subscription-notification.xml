@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cancelled-subscription-notification xmlns="http://checkout.google.com/schema/2" serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+  <item-ids />
+  <google-order-number>841171949013218</google-order-number>
+  <reason>Customer request to cancel</reason>
+  <timestamp>2009-10-15T23:51:04.662Z</timestamp>
+</cancelled-subscription-notification>
