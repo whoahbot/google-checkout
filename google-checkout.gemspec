@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
      "VERSION.yml",
      "examples/google_notifications_controller.rb",
      "lib/duck_punches/hpricot.rb",
+     "lib/duck_punches/inflector.rb",
      "lib/google-checkout.rb",
      "lib/google-checkout/cart.rb",
      "lib/google-checkout/command.rb",

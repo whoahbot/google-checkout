@@ -127,6 +127,7 @@ module GoogleCheckout
     # ** start_date
     # ** no_charge_after
     # ** payment_times
+    # ** max_charge
     # ** name
     # ** description
     # ** price
@@ -188,18 +189,24 @@ module GoogleCheckout
                 if item.key?(:subscription)
                   sub = item[:subscription]
                   
-                  xm.subscription(:type => sub[:type].to_s, :period => sub[:period].to_s, :"start-date" => sub[:start_date].to_s, :"no-charge-after" => sub[:no_charge_after].to_s) {
+                  sub_opts = {}
+                  sub_opts.merge!(:type => sub[:type].to_s) if sub[:type]
+                  sub_opts.merge!(:period => sub[:period].to_s) if sub[:period]
+                  sub_opts.merge!(:"start-date" => sub[:start_date].to_s) if sub[:start_date] 
+                  sub_opts.merge!(:"no-charge-after" => sub[:no_charge_after].to_s) if sub[:no_charge_after]
+                  
+                  xml.subscription(sub_opts) {
                     xml.payments {
                       if sub.key?(:payment_times)
                         xml.tag!('subscription-payment', :times => sub[:payment_times].to_s) {
                           xml.tag!('maximum-charge', :currency => (item[:currency] || 'USD')) {
-                            xml.text! item[:price].to_s
+                            xml.text! sub[:max_charge].to_s
                           }
                         }
                       else
                         xml.tag!('subscription-payment') {
                           xml.tag!('maximum-charge', :currency => (item[:currency] || 'USD')) {
-                            xml.text! item[:price].to_s
+                            xml.text! sub[:max_charge].to_s
                           }
                         }
                       end
