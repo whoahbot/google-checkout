@@ -121,6 +121,7 @@ module GoogleCheckout
     # You may fill in some optional values as well:
     # * quantity (defaults to 1)
     # * currency (defaults to 'USD')
+    # 
     # * subscription
     # ** type (defaults to 'google')
     # ** period (defaults to 'MONTHLY')
@@ -132,6 +133,11 @@ module GoogleCheckout
     # ** description
     # ** price
     # ** quantity
+    # 
+    # * digital_content
+    # ** disposition
+    # ** description
+    
     def add_item(item)
       @xml = nil
       if item.respond_to? :to_google_product
@@ -226,6 +232,20 @@ module GoogleCheckout
                         xml.text! sub[:quantity].to_s
                       }
                     }
+                  }
+                end
+                
+                # digital delivery
+                if item.key?(:digital_content)
+                  content = item[:digital_content]
+                  
+                  xml.tag!('digital-content') {
+                    xml.tag!('display-disposition') {
+                      xml.text! content[:disposition]
+                    }
+                    xml.description {
+                      xml.text! content[:description].to_s
+                    } if content[:description]
                   }
                 end
                 
