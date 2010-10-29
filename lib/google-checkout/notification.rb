@@ -101,6 +101,7 @@ module GoogleCheckout
       xml.instruct!
       @xml = xml.tag!('notification-acknowledgment', {
         :xmlns => "http://checkout.google.com/schema/2"
+        'serial-number' => serial_number
       })
       @xml
     end
