@@ -366,7 +366,7 @@ module GoogleCheckout
 
       # HACK Sandbox graphics are in the checkout subdirectory
       subdir = ""
-      if GoogleCheckout.sandbox? && bname == "checkout.gif"
+      if GoogleCheckout.sandbox? && (bname == "checkout.gif" || bname == "buy.gif")
         subdir = "checkout/"
       end
 
