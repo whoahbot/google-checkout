@@ -4,7 +4,7 @@ module GoogleCheckout
     attr_accessor :doc
 
     def self.parse(raw_xml)
-      doc = Hpricot.XML(raw_xml)
+      doc = Nokogiri::XML(raw_xml)
       return new(doc)
     end
 
@@ -13,7 +13,7 @@ module GoogleCheckout
     end
 
     def address_id
-      @doc.at('anonymous-address').attributes['id']
+      (@doc/"anonymous-address").attr('id').value
     end
 
     def method_missing(method_name, *args)

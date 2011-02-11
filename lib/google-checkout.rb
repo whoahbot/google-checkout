@@ -13,7 +13,7 @@ require 'active_support'
 require 'openssl'
 require 'base64'
 require 'builder/xmlmarkup'
-require 'hpricot'
+require 'nokogiri'
 require 'money'
 require 'net/https'
 
