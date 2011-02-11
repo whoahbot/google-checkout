@@ -153,7 +153,17 @@ module GoogleCheckout
 
   end
 
-  class ChargebackAmountNotification < Notification; end
+  class ChargebackAmountNotification < Notification
+
+    def latest_chargeback_amount
+      (@doc/"latest-chargeback-amount").to_money
+    end
+
+    def total_chargeback_amount
+      (@doc/"total-chargeback-amount").to_money
+    end
+
+  end
 
   class NewOrderNotification < Notification
 
