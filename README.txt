@@ -1,11 +1,17 @@
 google-checkout
-    by Peter Elmore and Geoffrey Grosenbach
-    http://rubyforge.org/projects/google-checkout
+
+    http://github.com/topfunky/google-checkout
 
 == DESCRIPTION:
   
 Experimental library for working with GoogleCheckout. Currently in use for
 payment at http://peepcode.com.
+
+== Authors
+
+Original by Peter Elmore.
+
+Enhanced and maintained by Geoffrey Grosenbach
 
 == Installation
 
