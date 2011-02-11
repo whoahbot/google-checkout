@@ -103,6 +103,19 @@ describe GoogleCheckout, "Cart Post" do
     @cart.to_xml.should_not match(%r{<merchant-calculations-url>})
   end
 
+  it "should include the merchant parameterized urls in the generated xml" do
+    @cart.parameterized_urls = [{
+      :url => "http://www.someapi.com",
+      :parameters => [
+        {:name => 'order', :type => 'order-id'},
+        {:name => 'rev', :type => 'order-total'}]}]
+    @cart.to_xml.should match(%r{<parameterized-urls><parameterized-url url="http://www.someapi.com"><parameters><url-parameter type="order-id" name="order"></url-parameter><url-parameter type="order-total" name="rev"></url-parameter></parameters></parameterized-url></parameterized-urls>})
+  end
+
+  it "should not include the merchant parameterized urls if it's not set" do
+    @cart.to_xml.should_not match(%r{<parameterized-urls>})
+  end
+
   it "should generate XML"
 
   it "should receive error when placing false request"

@@ -68,6 +68,7 @@ module GoogleCheckout
     attr_accessor :continue_shopping_url
 
     attr_accessor :merchant_calculations_url
+    attr_accessor :parameterized_urls
 
     attr_accessor :shipping_methods
 
@@ -275,6 +276,19 @@ module GoogleCheckout
             } if @merchant_calculations_url
 
             # TODO tax-tables
+
+            xml.tag!('parameterized-urls') {
+              @parameterized_urls.each do |param_url|
+                xml.tag!('parameterized-url', :url => param_url[:url]) {
+                  next if param_url[:parameters].blank?
+                  xml.tag!('parameters') {
+                    param_url[:parameters].each do |parameter|
+                      xml.tag!('url-parameter', :name => parameter[:name], :type => parameter[:type]) {}
+                    end
+                  }
+                }
+              end
+            } unless @parameterized_urls.blank?
 
             xml.tag!('shipping-methods') {
               @shipping_methods.each do |shipping_method|
