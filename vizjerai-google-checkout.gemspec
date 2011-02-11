@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vizjerai-google-checkout}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
@@ -61,6 +61,7 @@ Gem::Specification.new do |s|
     "spec/fixtures/google/notifications/charge-amount-notification.xml",
     "spec/fixtures/google/notifications/chargeback-amount-notification.xml",
     "spec/fixtures/google/notifications/new-order-notification.xml",
+    "spec/fixtures/google/notifications/order-state-change-notification-missing.xml",
     "spec/fixtures/google/notifications/order-state-change-notification.xml",
     "spec/fixtures/google/notifications/refund-amount-notification.xml",
     "spec/fixtures/google/notifications/risk-information-notification.xml",
