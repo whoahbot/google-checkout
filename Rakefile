@@ -30,7 +30,7 @@ begin
     s.add_dependency(%q<activesupport>, [">= 2.3.0"])
     s.add_dependency(%q<money>, [">= 2.3.0"])
     s.add_dependency(%q<nokogiri>, [">=0"])
-    s.add_dependency(%q<rspec>, ["~> 1.3.0"])
+    s.add_development_dependency(%q<rspec>, ["~> 1.3.0"])
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"
