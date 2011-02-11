@@ -275,19 +275,6 @@ module GoogleCheckout
             } if @merchant_calculations_url
 
             # TODO tax-tables
-            xml.tag!("tax-tables") {
-              xml.tag!("default-tax-table") {
-                xml.tag!("tax-rules") {
-                  xml.tag!("default-tax-rule") {
-                    xml.tag!("shipping-taxed", false)
-                    xml.tag!("rate", "0.00")
-                    xml.tag!("tax-area") {
-                      xml.tag!("world-area")
-                    }
-                  }
-                }
-              }
-            }
 
             xml.tag!('shipping-methods') {
               @shipping_methods.each do |shipping_method|
