@@ -4,11 +4,11 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{google-checkout}
+  s.name = %q{vizjerai-google-checkout}
   s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu"]
+  s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
   s.date = %q{2011-02-11}
   s.description = %q{An experimental library for sending payment requests to Google Checkout.}
   s.email = %q{assarata@gmail.com}
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
     "MIT-LICENSE.txt",
     "README.txt",
     "Rakefile",
-    "VERSION.yml",
+    "VERSION",
     "examples/google_notifications_controller.rb",
     "lib/duck_punches/hpricot.rb",
     "lib/duck_punches/inflector.rb",

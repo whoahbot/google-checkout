@@ -20,12 +20,12 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "google-checkout"
+    s.name = "vizjerai-google-checkout"
     s.summary = "An experimental library for sending payment requests to Google Checkout."
     s.email = "assarata@gmail.com"
     s.homepage = "http://github.com/vizjerai/google-checkout/"
     s.description = "An experimental library for sending payment requests to Google Checkout."
-    s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu"]
+    s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
     s.files = FileList["[A-Z]*", "{lib,spec,support,examples}/**/*"]
   end
 rescue LoadError
