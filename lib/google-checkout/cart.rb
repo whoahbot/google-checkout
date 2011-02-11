@@ -303,7 +303,8 @@ module GoogleCheckout
     # Returns the signature for the cart XML.
     def signature
       @xml or to_xml
-      HMAC::SHA1.digest(@merchant_key, @xml)
+      digest = OpenSSL::Digest::Digest.new('sha1')
+      OpenSSL::HMAC.digest(digest, @merchant_key, @xml)
     end
 
     # Returns HTML for a checkout form for buying all the items in the
