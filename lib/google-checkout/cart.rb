@@ -255,7 +255,7 @@ module GoogleCheckout
               }
             }
           }
-          unless @merchant_private_data.empty?
+          unless @merchant_private_data.blank?
             xml.tag!("merchant-private-data") {
               @merchant_private_data.each do |key, value|
                 xml.tag!(key, value)
