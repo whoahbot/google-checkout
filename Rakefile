@@ -27,6 +27,10 @@ begin
     s.description = "An experimental library for sending payment requests to Google Checkout."
     s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
     s.files = FileList["[A-Z]*", "{lib,spec,support,examples}/**/*"]
+    s.add_dependency(%q<activesupport>, [">= 2.3.0"])
+    s.add_dependency(%q<money>, [">= 2.3.0"])
+    s.add_dependency(%q<nokogiri>, [">=0"])
+    s.add_dependency(%q<rspec>, ["~> 1.3.0"])
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"
