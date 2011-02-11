@@ -22,7 +22,7 @@ describe GoogleCheckout, "Cart (generic)" do
   end
 
   it "should generate proper sandbox buy button_url" do
-    @cart.button_url.should match(%r{http://sandbox\.google\.com/buttons/buy\.gif})
+    @cart.button_url.should match(%r{http://sandbox\.google\.com/checkout/buttons/buy\.gif})
   end
 
   it "should generate proper sandbox checkout button_url" do
