@@ -8,6 +8,7 @@ $: << File.dirname(__FILE__)
 $: << File.dirname(__FILE__) + "/vendor/ruby-hmac/lib"
 
 require 'rubygems'
+require 'active_support'
 
 require 'openssl'
 require 'base64'
