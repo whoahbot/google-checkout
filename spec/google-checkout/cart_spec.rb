@@ -69,13 +69,23 @@ describe GoogleCheckout, "Cart Post" do
     response.redirect_url.should == 'https://checkout.google.com/buy?foo=bar&id=8572098456'
   end
 
-  it "should set merchant private data" do
+  it "should set merchant private data with a Hash" do
     @cart.merchant_private_data = { "merchant-order-number" => "1234-5678-9012" }
-    @cart.merchant_private_data["merchant-order-number"].should == "1234-5678-9012"
+    @cart.merchant_private_data.should == "<merchant-order-number>1234-5678-9012</merchant-order-number>"
   end
 
-  it "should include merchant private in the generated xml" do
+  it "should include merchant private data in the generated xml with a Hash" do
     @cart.merchant_private_data = { "merchant-order-number" => "1234-5678-9012" }
+    @cart.to_xml.should match(/<merchant-order-number>1234-5678-9012<\/merchant-order-number>/)
+  end
+
+  it "should set merchant private data with a String" do
+    @cart.merchant_private_data = "<merchant-order-number>1234-5678-9012</merchant-order-number>"
+    @cart.merchant_private_data.should == "<merchant-order-number>1234-5678-9012</merchant-order-number>"
+  end
+
+  it "should include merchant private data in the generated xml with a String" do
+    @cart.merchant_private_data = "<merchant-order-number>1234-5678-9012</merchant-order-number>"
     @cart.to_xml.should match(/<merchant-order-number>1234-5678-9012<\/merchant-order-number>/)
   end
 

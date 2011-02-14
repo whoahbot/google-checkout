@@ -88,13 +88,25 @@ module GoogleCheckout
     def initialize(merchant_id, merchant_key, *items)
       super(merchant_id, merchant_key)
       @contents = []
-      @merchant_private_data = {}
+      @merchant_private_data = ''
       @shipping_methods = []
       items.each { |i| add_item i }
     end
 
     def empty?
       @contents.empty?
+    end
+
+    def merchant_private_data=(value)
+      if value.is_a?(Hash)
+        xml = Builder::XmlMarkup.new
+        value.each do |key, value|
+          xml.tag!(key, value)
+        end
+        @merchant_private_data = xml.target!
+      elsif value.is_a?(String)
+        @merchant_private_data = value
+      end
     end
 
     # Number of items in the cart.
@@ -258,9 +270,7 @@ module GoogleCheckout
           }
           unless @merchant_private_data.blank?
             xml.tag!("merchant-private-data") {
-              @merchant_private_data.each do |key, value|
-                xml.tag!(key, value)
-              end
+              xml << @merchant_private_data
             }
           end
         }
