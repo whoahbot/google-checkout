@@ -20,12 +20,12 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "vizjerai-google-checkout"
+    s.name = "whoahbot-google-checkout"
     s.summary = "An experimental library for sending payment requests to Google Checkout."
-    s.email = "assarata@gmail.com"
-    s.homepage = "http://github.com/vizjerai/google-checkout/"
+    s.email = "whoahbot@gmail.com"
+    s.homepage = "http://github.com/whoahbot/google-checkout/"
     s.description = "An experimental library for sending payment requests to Google Checkout."
-    s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
+    s.authors = ["Dan Herrera", "Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
     s.files = FileList["[A-Z]*", "{lib,spec,support,examples}/**/*"]
     s.add_dependency(%q<activesupport>, [">= 2.3.0"])
     s.add_dependency(%q<money>, [">= 2.3.0"])

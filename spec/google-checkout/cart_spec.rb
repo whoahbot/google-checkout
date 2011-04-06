@@ -126,6 +126,16 @@ describe GoogleCheckout, "Cart Post" do
     @cart.to_xml.should_not match(%r{<parameterized-urls>})
   end
 
+  it "should include the item weight if specified" do
+    @cart.add_item({
+      :name => "Frogjiggler",
+      :description => "Frog Jiggler (automatic)",
+      :price => "100.00",
+      :item_weight => 15
+    })
+    @cart.to_xml.should match(%r{<item-weight value="15" unit="LB"/>})
+  end
+
   it "should generate XML"
 
   it "should receive error when placing false request"

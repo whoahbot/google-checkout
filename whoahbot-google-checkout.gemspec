@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{vizjerai-google-checkout}
+  s.name = %q{whoahbot-google-checkout}
   s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
-  s.date = %q{2011-02-14}
+  s.authors = ["Dan Herrera", "Peter Elmore", "Geoffrey Grosenbach", "Matt Lins", "Steel Fu", "Andrew Assarattanakul"]
+  s.date = %q{2011-04-05}
   s.description = %q{An experimental library for sending payment requests to Google Checkout.}
-  s.email = %q{assarata@gmail.com}
+  s.email = %q{whoahbot@gmail.com}
   s.extra_rdoc_files = [
     "README.txt"
   ]
@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
     "lib/google-checkout/merchant_calculation.rb",
     "lib/google-checkout/notification.rb",
     "lib/google-checkout/shipping.rb",
+    "lib/google-checkout/shipping/carrier_calculated.rb",
     "lib/google-checkout/shipping/filters.rb",
     "lib/google-checkout/shipping/flat_rate.rb",
     "lib/google-checkout/shipping/merchant_calculated.rb",
@@ -79,6 +80,7 @@ Gem::Specification.new do |s|
     "spec/google-checkout/merchant_calculation_spec.rb",
     "spec/google-checkout/notification_spec.rb",
     "spec/google-checkout/response_spec.rb",
+    "spec/google-checkout/shipping/carrier_calculated_spec.rb",
     "spec/google-checkout/shipping/flat_rate_spec.rb",
     "spec/google-checkout/shipping/merchant_calculated_spec.rb",
     "spec/google-checkout/shipping/pickup_spec.rb",
@@ -86,9 +88,9 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "support/cacert.pem"
   ]
-  s.homepage = %q{http://github.com/vizjerai/google-checkout/}
+  s.homepage = %q{http://github.com/whoahbot/google-checkout/}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{An experimental library for sending payment requests to Google Checkout.}
   s.test_files = [
     "examples/google_notifications_controller.rb",
@@ -102,6 +104,7 @@ Gem::Specification.new do |s|
     "spec/google-checkout/merchant_calculation_spec.rb",
     "spec/google-checkout/notification_spec.rb",
     "spec/google-checkout/response_spec.rb",
+    "spec/google-checkout/shipping/carrier_calculated_spec.rb",
     "spec/google-checkout/shipping/flat_rate_spec.rb",
     "spec/google-checkout/shipping/merchant_calculated_spec.rb",
     "spec/google-checkout/shipping/pickup_spec.rb",
@@ -110,6 +113,7 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then

@@ -1,4 +1,3 @@
-
 module GoogleCheckout
 
   # These are the only sizes allowed by Google.  These shouldn't be needed
@@ -146,6 +145,7 @@ module GoogleCheckout
     # ** description
     # ** price
     # ** quantity
+    # ** weight
     # 
     # * digital_content
     # ** disposition
@@ -197,6 +197,7 @@ module GoogleCheckout
                 xml.tag!('item-description') {
                   xml.text! item[:description].to_s
                 }
+                xml.tag!('item-weight', :unit => 'LB', :value => item[:item_weight]) if item[:item_weight]
                 xml.tag!('unit-price', :currency => (item[:currency] || 'USD')) {
                   xml.text! item[:price].to_s
                 }
@@ -268,7 +269,7 @@ module GoogleCheckout
               }
             }
           }
-          unless @merchant_private_data.blank?
+          unless @merchant_private_data.empty?
             xml.tag!("merchant-private-data") {
               xml << @merchant_private_data
             }
@@ -290,7 +291,7 @@ module GoogleCheckout
             xml.tag!('parameterized-urls') {
               @parameterized_urls.each do |param_url|
                 xml.tag!('parameterized-url', :url => param_url[:url]) {
-                  next if param_url[:parameters].blank?
+                  next if param_url[:parameters].empty?
                   xml.tag!('parameters') {
                     param_url[:parameters].each do |parameter|
                       xml.tag!('url-parameter', :name => parameter[:name], :type => parameter[:type]) {}
@@ -298,7 +299,7 @@ module GoogleCheckout
                   }
                 }
               end
-            } unless @parameterized_urls.blank?
+            } unless @parameterized_urls.nil?
 
             xml.tag!('shipping-methods') {
               @shipping_methods.each do |shipping_method|
